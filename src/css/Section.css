@@ -3,6 +3,31 @@
     margin: 0 auto;
 }
 
-.paragraph {
-    margin-bottom: 1rem;
+.section-index-list {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 12px 20px 18px 0;
+    margin-left: 5px;
+}
+
+.section-index-list::before {
+    content: "목차";
+    font-size: 1.25em;
+    margin-left: 14px;
+}
+
+.section-index-indent{
+    margin-top: 12px;
+    padding-left: 20px;
+    display : block;
+}
+
+.section-photo-profile{
+    margin-left: 20px;
+    margin-bottom: 20px;
+    float: right;
+}
+
+.section-photo {
+    padding : 0px,
 }

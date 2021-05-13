@@ -4,9 +4,9 @@ import ArticleContent from './ArticleContent';
 
 import '../../css/Article.css'
 
-const Article = (props) => {
+const ArticleItem = (props) => {
     return (
-        <div>
+        <div id = {props.head}>
         <h2><ArticleHead name = {props.head}/></h2>
         <hr/>
         <ArticleContent blahblah = {props.content}/>
@@ -14,4 +14,4 @@ const Article = (props) => {
     )
 }
 
-export default Article;
+export default ArticleItem;
