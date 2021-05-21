@@ -17,10 +17,10 @@ const HeaderSearch = () => {
         </div>
         <span>
           <button type="button">
-            <AiOutlineSearch className="search-icon" onClick="" />
+            <AiOutlineSearch className="search-icon"/>
           </button>
           <button type="button">
-            <AiOutlineArrowRight className="forward-icon" onClick="" />
+            <AiOutlineArrowRight className="forward-icon"/>
           </button>
         </span>
       </div>

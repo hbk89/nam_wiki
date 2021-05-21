@@ -3,7 +3,7 @@ import {AiOutlineUser} from 'react-icons/ai'
 
 const HeaderMy = () =>{
     return(
-        <button onClick = "">
+        <button>
             <AiOutlineUser/>
         </button>
     )

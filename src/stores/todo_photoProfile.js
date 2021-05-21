@@ -1,4 +1,4 @@
-const photoProfile = {
+const tmp_profile = {
   id: 1,
   photo: " ",
     birth: {
@@ -38,4 +38,4 @@ const photoProfile = {
     },
 };
 
-export default photoProfile;
+export default tmp_profile;
