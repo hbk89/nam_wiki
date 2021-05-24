@@ -11,16 +11,22 @@ const familySchema = new Schema(
 const eduSchema = new Schema(
   {
     name: String,
-    kind: String,
+    level: String,
+    status: String,
   }
 );
 
-const contact_etc = new Schema(
+const contactEtcSchema = new Schema(
   {
     name: String,
     address : String,
   }
 );
+
+const wikiSchema = new Schema({
+  name : String,
+  content : String,
+});
 
 const profileSchema = new Schema({
   name: String,
@@ -36,7 +42,7 @@ const profileSchema = new Schema({
     bloodType: String,
   },
   family: [familySchema],
-  education: [eduSchema],
+  edu: [eduSchema],
   military: {
     kind: String,
     status: String,
@@ -44,8 +50,9 @@ const profileSchema = new Schema({
   contact: {
     mail: String,
     mobile: String,
-    etc: [contact_etc],
+    etc: [contactEtcSchema],
   },
+  wiki : [wikiSchema],
 });
 
 module.exports = mongoose.model('profile', profileSchema);

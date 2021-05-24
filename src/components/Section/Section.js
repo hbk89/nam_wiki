@@ -1,23 +1,31 @@
 import React from "react";
+import { Observer } from "mobx-react-lite";
 import useStore from "../../useStore";
 
 import SectionTitle from "./SectionTitle";
 import SectionIndexList from "./SectionIndexList";
-import SectionPhotoProfile from "./SectionPhotoProfile";
+import SectionProfile from "./SectionProfile";
 import ArticleList from "../Article/ArticleList";
 
 import "../../css/Section.css";
 
 const Section = () => {
-  const { articleList } = useStore();
+  // 본문
+  const { articleList, profileStore } = useStore();
+  const id = "60ab105ab3a0f8175485e9d3";
+  profileStore.getProfile(id);
 
   return (
-    <div className="section">
-      <SectionTitle />
-      <SectionPhotoProfile />
-      <SectionIndexList index = {articleList}/>
-      <ArticleList articleList = {articleList}/>
-    </div>
+    <Observer>
+      {() => (
+        <div className="section">
+          <SectionTitle />
+          <SectionProfile profile={profileStore.curProfile} />
+          <SectionIndexList index={articleList} />
+          <ArticleList articleList={articleList} />
+        </div>
+      )}
+    </Observer>
   );
 };
 

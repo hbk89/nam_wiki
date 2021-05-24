@@ -1,8 +1,8 @@
 import articleList from './stores/todo_articleList';
-import photoProfile from './stores/todo_photoProfile';
+import profileStore from './stores/profileStore';
 
 const useStore = () =>{
-    return {articleList, photoProfile};
+    return {articleList, profileStore};
 }
 
 export default useStore;

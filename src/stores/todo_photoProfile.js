@@ -1,5 +1,4 @@
 const tmp_profile = {
-  id: 1,
   photo: " ",
     birth: {
       date: `1989년 10월 29일 (${2021 - 1989}세)`,

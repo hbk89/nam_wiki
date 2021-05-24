@@ -24,7 +24,7 @@ mongoose.connect('mongodb://localhost/namwiki', {useNewUrlParser: true, useUnifi
 const profileModel = require('./models/profile');
 
 // route
-const router = require('./routes')(app, profileModel);
+const profileRouter = require('./routes/profileRouter')(app, profileModel);
 
 // PORT
 const port = process.env.port || 8080;

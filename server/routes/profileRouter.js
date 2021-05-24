@@ -1,8 +1,7 @@
-const { response } = require("express");
 const profile = require("../models/profile");
 
 module.exports = function (app, profileModel) {
-  // 전체 조회
+  // 프로필 전체 조회
   app.get("/api/profiles", function (req, res) {
     profileModel.find(function (err, profiles) {
       if (err) return res.status(500).send({ error: "조회 실패!" });
@@ -31,9 +30,17 @@ module.exports = function (app, profileModel) {
   // 프로필 생성
   app.post("/api/profiles", function (req, res) {
     const profile = new profileModel();
-    profile.id = req.body.id;
+
+    // todo. 객체 복사 어떻게 하지?
     profile.name = req.body.name;
-    profile.birth = {date: new Date(req.body.birth.date), place: req.body.birth.place};
+    profile.photo = req.body.photo;
+    profile.birth = {...req.body.birth};
+    profile.nationality = req.body.nationality;
+    profile.body = {...req.body.body};
+    profile.family = [...req.body.family];
+    profile.edu = [...req.body.edu];
+    profile.military = {...req.body.military};
+    profile.contact = {...req.body.contact};
 
     profile.save(function (err) {
       if (err) {
