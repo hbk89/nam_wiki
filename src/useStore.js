@@ -1,8 +1,8 @@
-import articleList from './stores/todo_articleList';
-import profileStore from './stores/profileStore';
+import wikiStore from './stores/wikiStore';
+import searchStore from './stores/searchStore';
 
 const useStore = () =>{
-    return {articleList, profileStore};
+    return {wikiStore, searchStore};
 }
 
 export default useStore;

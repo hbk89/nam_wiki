@@ -1,8 +1,22 @@
 import React from "react";
+import {Observer} from "mobx-react-lite";
+import useStore from "../../useStore";
+
+import HeaderSearchList from "./HeaderSearchList";
 import { AiOutlineSearch } from "react-icons/ai";
 import { AiOutlineArrowRight } from "react-icons/ai";
 
 const HeaderSearch = () => {
+  const {searchStore} = useStore();
+
+  const handleChange = (e) =>{
+    searchStore.search(e.target.value);
+  }
+
+  const handleFocus = (e) => {
+    let a= 1;
+  }
+
   return (
     <form>
       <div className="search">
@@ -13,7 +27,14 @@ const HeaderSearch = () => {
             placeholder="Search"
             tabIndex="1"
             autoComplete="off"
-          ></input>
+            onChange={handleChange}
+            onFocus={handleFocus}
+          />
+                <Observer>
+        {() => (
+          <HeaderSearchList searchList={searchStore.searchList} />
+          )}
+          </Observer>
         </div>
         <span>
           <button type="button">

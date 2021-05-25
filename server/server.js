@@ -21,10 +21,10 @@ db.once('open', function(){
 mongoose.connect('mongodb://localhost/namwiki', {useNewUrlParser: true, useUnifiedTopology: true});
 
 // Model
-const profileModel = require('./models/profile');
+const wikiModel = require('./models/wiki');
 
 // route
-const profileRouter = require('./routes/profileRouter')(app, profileModel);
+const router = require('./routes/wikiRouter')(app, wikiModel);
 
 // PORT
 const port = process.env.port || 8080;

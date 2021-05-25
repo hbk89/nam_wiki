@@ -1,4 +1,5 @@
 import React from "react";
+import {Observer} from "mobx-react-lite"
 
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -11,7 +12,7 @@ import TableRow from "@material-ui/core/TableRow";
 import photo from "../../images/gum.jpg";
 
 const SectionProfile = (props) => {
-  return (
+  return ( 
         <div className="section-photo-profile" style={{ width: "550px" }}>
           <Table>
             <TableHead>
@@ -53,7 +54,7 @@ const SectionProfile = (props) => {
                 <TableCell>학력</TableCell>
                 <TableCell>
                   {props.profile.edu.map((item) => (
-                    <div key={item._id}>
+                    <div key={item.name}>
                       <span>{item.name + item.level}</span>
                       <span>{" (" + item.status + ") "}</span>
                     </div>
@@ -64,7 +65,7 @@ const SectionProfile = (props) => {
                 <TableCell>가족</TableCell>
                 <TableCell>
                   {props.profile.family.map((item) => (
-                    <span key = {item._id}>
+                    <span key = {item.name}>
                       {item.relation} {item.name},
                     </span>
                     

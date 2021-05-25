@@ -11,18 +11,18 @@ import "../../css/Section.css";
 
 const Section = () => {
   // 본문
-  const { articleList, profileStore } = useStore();
-  const id = "60ab105ab3a0f8175485e9d3";
-  profileStore.getProfile(id);
+  const { wikiStore } = useStore();
+  const id = "60ac976ab6df1d3624c350cc";
+  wikiStore.getWiki(id);
 
   return (
     <Observer>
       {() => (
         <div className="section">
           <SectionTitle />
-          <SectionProfile profile={profileStore.curProfile} />
-          <SectionIndexList index={articleList} />
-          <ArticleList articleList={articleList} />
+          <SectionProfile profile={wikiStore.curWiki.profile} />
+          <SectionIndexList index={wikiStore.curWiki.wikiList} />
+          <ArticleList articleList={wikiStore.curWiki.wikiList} />
         </div>
       )}
     </Observer>
