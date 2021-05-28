@@ -1,45 +1,12 @@
 const wikiModel = {
-  profile: {
-    name: "",
-    photo: "",
-    birth: {
-      date: "",
-      place: "",
+  name : "",
+  profile: [
+    {
+      head: "",
+      content: [],
     },
-    nationality: "",
-    body: {
-      height: "",
-      weight: "",
-      bloodType: "",
-    },
-    family: [
-      {
-        relation: "",
-        name: "",
-      },
-    ],
-    edu: [
-      {
-        name: "",
-        level: "",
-        status: "",
-      },
-    ],
-    military: {
-      kind: "",
-      status: "",
-    },
-    contact: {
-      mail: "",
-      mobile: "",
-      etc: [
-        {
-          name: "",
-        },
-      ],
-    },
-  },
-  wikiList: [
+  ],
+  wikiContents: [
     {
       id: "",
       head: "",

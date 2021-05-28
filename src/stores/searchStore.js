@@ -5,10 +5,10 @@ const searchStore = observable({
     searchList : [],
 
     setSearchList(data) {
-        this.searchList = {...data};
+        this.searchList = data;
     },
     
-    search(word){
+    getSearchList(word){
         axios.get("http://localhost:8080/api/wikiList/name/" + word)
         .then((res) => {
             this.setSearchList(res.data);

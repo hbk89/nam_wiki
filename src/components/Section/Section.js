@@ -10,19 +10,16 @@ import ArticleList from "../Article/ArticleList";
 import "../../css/Section.css";
 
 const Section = () => {
-  // 본문
   const { wikiStore } = useStore();
-  const id = "60ac976ab6df1d3624c350cc";
-  wikiStore.getWiki(id);
-
+  
   return (
     <Observer>
       {() => (
         <div className="section">
           <SectionTitle />
-          <SectionProfile profile={wikiStore.curWiki.profile} />
-          <SectionIndexList index={wikiStore.curWiki.wikiList} />
-          <ArticleList articleList={wikiStore.curWiki.wikiList} />
+          <SectionProfile wiki={wikiStore.curWiki} />
+          <SectionIndexList index={wikiStore.curWiki.wikiContents} />
+          <ArticleList articleList={wikiStore.curWiki.wikiContents} />
         </div>
       )}
     </Observer>
