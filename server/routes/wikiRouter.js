@@ -27,9 +27,21 @@ module.exports = function (app, wikiModel, searchModel) {
     });
   });
 
-  // 이름 조회
+  // 이름 조회 (검색 리스트)
   app.get("/api/wikiList/name/:wiki_name", function (req, res) {
     searchModel.find(
+      { name: new RegExp(req.params.wiki_name) },
+      function (err, searchList) {
+        if (err) return res.status(500).json({ error: err });
+        //if(searchList.length === 0) return res.status(404).json({error: '이 name의 검색결과는 없어!'});
+        res.json(searchList);
+      }
+    );
+  });
+
+  // 하나만 조회 (도메인)
+  app.get("/api/wiki/name/:wiki_name", function (req, res) {
+    wikiModel.findOne(
       { name: new RegExp(req.params.wiki_name) },
       function (err, searchList) {
         if (err) return res.status(500).json({ error: err });

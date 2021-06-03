@@ -3,6 +3,35 @@
     margin: 0 auto;
 }
 
+.section-subtitle{
+    float: right;
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.section-subtitle-item{
+    font-size: .9rem;
+    padding: .3rem .8rem;
+    position: relative;
+    float: left;
+    color: #373a3c!important;
+    background-color: #fff;
+    display: inline-block;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: .0625rem solid #ccc;
+}
+
 .section-index-list {
     border: 1px solid #ccc;
     display: inline-block;

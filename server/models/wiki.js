@@ -23,32 +23,6 @@ const wikiItemSchema = new Schema({
   content: String,
 });
 
-// const profileSchema = new Schema({
-//   name: String,
-//   photo: String,
-//   birth: {
-//     date: Date,
-//     place: String,
-//   },
-//   nationality: String,
-//   body: {
-//     height: String,
-//     weight: String,
-//     bloodType: String,
-//   },
-//   family: [familySchema],
-//   edu: [eduSchema],
-//   military: {
-//     kind: String,
-//     status: String,
-//   },
-//   contact: {
-//     mail: String,
-//     mobile: String,
-//     etc: [contactEtcSchema],
-//   },
-// });
-
 const profileItemSchema = new Schema({
   head : String,
   content: Array,

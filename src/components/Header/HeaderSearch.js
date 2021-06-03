@@ -12,10 +12,7 @@ const HeaderSearch = () => {
   const { searchStore } = useStore();
 
   const handleChange = (e) => {
-    if(e.target.value.length) {
       searchStore.getSearchList(e.target.value);
-      //document.getElementsByClassName("header-search-list")[0].style.display = "";
-    }
   };
 
   const handleFocus = (e) => {
@@ -25,7 +22,6 @@ const HeaderSearch = () => {
 
   const handleBlur = () => {
     console.log("focusOut");
-    //document.getElementsByClassName("header-search-list")[0].style.display = "none";
   };
 
   return (
