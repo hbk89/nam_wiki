@@ -1,17 +1,33 @@
-import React from 'react';
-import Editor from '@monaco-editor/react';
-import Section from '../components/Section/Section'
+import React, {useRef} from 'react';
+import {Editor} from '@toast-ui/react-editor'
 
-import '../css/Editor.css';
+import '@toast-ui/editor/dist/toastui-editor.css'
+import '../css/Edit.css';
 
-const Edit = () => {
+const Edit = (props) => {
+    const editorRef = useRef(null);
+
+    const handleEditorChange= (value, event) => {
+        console.log("editor change");
+    }
+    const saveWiki = () => {
+        let a = editorRef;
+    }
+
     return (
-        <Editor className="wiki-editor"
-            width="944px"
+        <div >
+        <h1>props.name</h1>
+        <Editor
+            initialValue="안녕! TOAST 에디터야"
+            previewStyle="vertical"
             height="480px"
-            defaultLanguage="javascript"
-            defaultValue="// ***의 편집입니다."
+            initialEditType="markdown"
+            useCommandShortcut={true}
+            ref={editorRef}
+            onChange={handleEditorChange}
         />
+        <button onClick={saveWiki}>저장</button>
+        </div>
     )
 }
 

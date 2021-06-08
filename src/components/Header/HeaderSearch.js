@@ -1,6 +1,6 @@
 import React from "react";
 import { Observer } from "mobx-react-lite";
-import useStore from "../../useStore";
+//import useStore from "../../useStore";
 
 import HeaderSearchList from "./HeaderSearchList";
 import { AiOutlineSearch } from "react-icons/ai";
@@ -9,10 +9,12 @@ import { AiOutlineArrowRight } from "react-icons/ai";
 import "../../css/Header.css";
 
 const HeaderSearch = () => {
-  const { searchStore } = useStore();
+  //const { searchStore } = useStore();
 
   const handleChange = (e) => {
-      searchStore.getSearchList(e.target.value);
+    if(e.target.value){
+
+    }
   };
 
   const handleFocus = (e) => {
