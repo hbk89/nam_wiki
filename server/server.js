@@ -22,10 +22,11 @@ mongoose.connect('mongodb://localhost/namwiki', {useNewUrlParser: true, useUnifi
 
 // Model
 const wikiModel = require('./models/wiki');
-const searchModel = require('./models/search');
+const domainModel = require('./models/domain');
 
 // route
-const router = require('./routes/wikiRouter')(app, wikiModel, searchModel);
+const wikiRouter = require('./routes/wikiRouter')(app, wikiModel, domainModel);
+const domainRouter = require('./routes/domainRouter')(app,domainModel);
 
 // PORT
 const port = process.env.port || 8080;

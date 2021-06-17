@@ -1,28 +1,21 @@
 import React from "react";
-import useStore from "../../useStore";
+import {Link} from "react-router-dom"
 
 const HeaderSearchList = (props) => {
-  const { wikiStore, searchStore } = useStore();
-
-  const route = (id) => {
+  const onRoute = (id) => {
     console.log(id + "컴온");
-    // 검색하고 이동후 초기화
-    // todo. 나중에는 아예 route로 도메인을 돌릴 예정
-    // 즉 이 과정이 필요 없음
-    wikiStore.getWiki(id);
-    // input.reset();
-    searchStore.initSearchList();
+
   };
 
   return (
     <div className="header-search-list">
       {props.searchList.map((item) => (
-        <div
+        <div key = {item.id}>
+          <Link to= {`/about/${item.name}`}
           className="header-search-item"
-          key={item._id}
-          onClick={() => route(item.id)}
-        >
+          >
           {item.name}
+          </Link>
         </div>
       ))}
     </div>

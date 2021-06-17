@@ -6,4 +6,4 @@ const searchSchema = new Schema({
     name : String,
 })
 
-module.exports = mongoose.model("search", searchSchema);
+//module.exports = mongoose.model("search", searchSchema);
