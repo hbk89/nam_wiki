@@ -1,13 +1,16 @@
-import React from "react";
-import HeaderNav from './HeaderNav';
+import React from 'react';
+import HeaderSearch from "./HeaderSearch";
+import HeaderMyPage from "./HeaderMyPage";
 
-import "../../css/Header.css"
+import '../../css/Header.css'
 
 const Header = () => {
   return (
-    <div className="header">
-      <HeaderNav/>
-    </div>
+    <nav className="header nav">
+      <a href="/">나므위키</a>
+      <HeaderSearch />
+      <HeaderMyPage />
+    </nav>
   );
 };
 

@@ -11,10 +11,10 @@ const HeaderSearchList = (props) => {
     <div className="header-search-list">
       {props.searchList.map((item) => (
         <div key = {item.id}>
-          <Link to= {`/about/${item.name}`}
+          <Link to= {`/wiki/${item.id}`}
           className="header-search-item"
           >
-          {item.name}
+          {item.id}
           </Link>
         </div>
       ))}

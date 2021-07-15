@@ -1,7 +1,7 @@
 import React from 'react';
 import {AiOutlineUser} from 'react-icons/ai'
 
-const HeaderMy = () =>{
+const HeaderMyPage = () =>{
     return(
         <button>
             <AiOutlineUser/>
@@ -9,4 +9,4 @@ const HeaderMy = () =>{
     )
 }
 
-export default HeaderMy;
+export default HeaderMyPage;

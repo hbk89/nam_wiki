@@ -1,9 +1,5 @@
 .header {
     background-color: #008275;
-    display: block;
-}
-
-.nav{
     display: flex;
 }
 

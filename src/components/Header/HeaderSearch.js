@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import axios from "axios";
+import {useHistory} from "react-router-dom";
+import axios from "axios"
 
 import HeaderSearchList from "./HeaderSearchList";
 import { AiOutlineSearch } from "react-icons/ai";
@@ -9,20 +10,26 @@ import "../../css/Header.css";
 
 const HeaderSearch = () => {
   const [searchList, setSearchList] = useState([]);
+  const history = useHistory();
 
-  const handleChange = (e) => {
-    if (e.target.value) {
-      axios
-        .get("http://localhost:8080/api/wikiList/name/" + e.target.value)
-        .then((res) => {
-          setSearchList(res.data);
-        })
-        .catch((err) => console.log(err));
+  const onEnter = (e) => {
+    if (e.key === "Enter") {
+      // 도메인 페이지로
+      history.push(`/domain/${e.target.value}`)
     }
   };
 
+  const handleChange = (e) => {
+    axios
+    .get(`http://localhost:8080/api/domain/${e.target.value}`)
+    .then((res) => {
+      if(res.data)
+        setSearchList(res.data.list);
+    })
+    .catch((err) => console.log(err));
+  }
+  
   const handleFocus = (e) => {
-    handleChange(e);
     console.log("focus");
   };
 
@@ -38,10 +45,10 @@ const HeaderSearch = () => {
           <input
             className="search-input-input"
             type="search"
-            placeholder="Search"
-            tabIndex="1"
+            placeholder="검색"
             autoComplete="off"
             onChange={handleChange}
+            onKeyPress={onEnter}
           />
           <HeaderSearchList searchList={searchList} />
         </div>
