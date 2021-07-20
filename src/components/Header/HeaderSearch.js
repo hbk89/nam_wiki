@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import {useHistory} from "react-router-dom";
-import axios from "axios"
+import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import axios from "axios";
 
 import HeaderSearchList from "./HeaderSearchList";
 import { AiOutlineSearch } from "react-icons/ai";
@@ -9,32 +9,44 @@ import { AiOutlineArrowRight } from "react-icons/ai";
 import "../../css/Header.css";
 
 const HeaderSearch = () => {
+  const [searchWord, setSearchWord] = useState("");
   const [searchList, setSearchList] = useState([]);
   const history = useHistory();
 
-  const onEnter = (e) => {
+  useEffect(() => {
+    if (searchWord === "") {
+      setSearchList([]);
+    } else {
+      axios
+        .get(`http://localhost:8080/api/domain/search/${searchWord}`)
+        .then((res) => {
+          if (res.data.length) setSearchList(res.data);
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [searchWord]);
+
+  const handleKeyPress = (e) => {
     if (e.key === "Enter") {
       // 도메인 페이지로
-      history.push(`/domain/${e.target.value}`)
+      history.push(`/domain/${e.target.value}`);
     }
   };
 
   const handleChange = (e) => {
-    axios
-    .get(`http://localhost:8080/api/domain/${e.target.value}`)
-    .then((res) => {
-      if(res.data)
-        setSearchList(res.data.list);
-    })
-    .catch((err) => console.log(err));
-  }
-  
-  const handleFocus = (e) => {
-    console.log("focus");
+    console.log("change");
+    setSearchWord(e.target.value);
   };
 
-  const handleBlur = () => {
+  const handleFocus = (e) => {
+    console.log("focus");
+    setSearchWord(e.target.value);
+  };
+
+  const handleBlur = (e) => {
     console.log("focusOut");
+    // 야매라 쓰고 나무위키도 이렇게 한다고 말한다
+    setTimeout(() => setSearchWord(""), 500);
   };
 
   return (
@@ -48,7 +60,7 @@ const HeaderSearch = () => {
             placeholder="검색"
             autoComplete="off"
             onChange={handleChange}
-            onKeyPress={onEnter}
+            onKeyPress={handleKeyPress}
           />
           <HeaderSearchList searchList={searchList} />
         </div>

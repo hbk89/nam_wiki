@@ -21,8 +21,8 @@ db.once('open', function(){
 mongoose.connect('mongodb://localhost/namwiki', {useNewUrlParser: true, useUnifiedTopology: true});
 
 // Model
-const wikiModel = require('./models/wiki');
-const domainModel = require('./models/domain');
+const wikiModel = require('./models/wikiModel');
+const domainModel = require('./models/domainModel');
 
 // route
 const wikiRouter = require('./routes/wikiRouter')(app, wikiModel, domainModel);

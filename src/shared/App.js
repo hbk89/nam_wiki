@@ -10,8 +10,8 @@ function App() {
       <Header/>
       <div className = "section" >
       <Route exact path = "/" component={Home}/>
-      <Route exact path = "/about" component={Domain}/>
-      <Route exact path = "/about/:name" component={Domain}/>
+      <Route exact path = "/domain" component={Domain}/>
+      <Route exact path = "/domain/:name" component={Domain}/>
       <Route exact path = "/wiki/:id" component={Wiki}/>
       {/* <Route exact path = "/edit" component={Edit}/> */}
       {/* 새 등록 */}

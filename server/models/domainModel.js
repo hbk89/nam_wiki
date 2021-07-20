@@ -7,7 +7,7 @@ const domainSchema = new Schema({
     // 동명이인 리스트
     [
       {
-        wikiId: String, // 위키 id
+        id: String, // 위키 id
         brief: String, // 간략 설명
       },
     ],
