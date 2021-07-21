@@ -1,9 +1,10 @@
 import React from 'react';
 import {Route} from 'react-router-dom';
-import {Home, Domain, New, Update, Wiki} from '../pages'
+import {Home, Domain, New, Update, Wiki} from '.'
 import Header from '../components/Header/Header'
 
 import '../css/Section.css'
+
 function App() {
   return (
     <div>

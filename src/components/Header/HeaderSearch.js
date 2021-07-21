@@ -46,7 +46,7 @@ const HeaderSearch = () => {
   const handleBlur = (e) => {
     console.log("focusOut");
     // 야매라 쓰고 나무위키도 이렇게 한다고 말한다
-    setTimeout(() => setSearchWord(""), 500);
+    setTimeout(() => setSearchWord(""), 100);
   };
 
   return (

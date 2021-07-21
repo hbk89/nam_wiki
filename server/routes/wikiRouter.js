@@ -9,11 +9,11 @@ module.exports = function (app, wikiModel, domainModel) {
     });
   });
 
-  app.get("/api/wiki/:id", function(req, res) {
-    wikiModel.findById(req.params.id, function(err, wiki){
-      if(err) return res.status(500).send({ error: "조회 실패"});
+  app.get("/api/wiki/:id", function (req, res) {
+    wikiModel.findById(req.params.id, function (err, wiki) {
+      if (err) return res.status(500).send({ error: "조회 실패" });
       res.send(wiki);
-    })
+    });
   });
 
   // 위키 생성
@@ -29,7 +29,7 @@ module.exports = function (app, wikiModel, domainModel) {
       }
       domainModel.updateOne(
         { name: wiki.name },
-        { $push: {list: { id: wiki._id, brief: wiki.brief } } },
+        { $push: { list: { id: wiki._id, brief: wiki.brief } } },
         { upsert: true },
         function (err) {
           if (err) {
@@ -47,7 +47,7 @@ module.exports = function (app, wikiModel, domainModel) {
       if (err) return res.status(500).send({ error: "디비 실패" });
       if (!wiki) return res.status(404).send({ error: "없는데요?" });
 
-      if(req.body.brief||req.body.def){
+      if (req.body.brief || req.body.def) {
         wiki.brief = req.body.brief;
         wiki.def = req.body.def;
       }
@@ -57,24 +57,32 @@ module.exports = function (app, wikiModel, domainModel) {
           return res.send({ error: "위키 수정 실패" });
         }
         domainModel.updateOne(
-          { list: {$elemMatch: {id: new RegExp(wiki._id)}}},
-          { $set: {list : { id: wiki._id, brief: wiki.brief}}},
+          { list: { $elemMatch: { id: wiki._id } } },
+          { $set: { list: { id: wiki._id, brief: wiki.brief } } },
           function (err) {
-            if (err)  return res.send({ error: "도메인 수정 실패" });
+            if (err) return res.send({ error: "도메인 수정 실패" });
           }
         );
       });
-      //res.send({ message: "위키 & 도메인 수정 완료" });
       res.json(wiki);
     });
   });
 
   app.delete("/api/wiki/:wiki_id", function (req, res) {
     // remove(deprecated) -> deleteOne, deleteMany
-    wikiModel.deleteOne({ _id: req.params.wiki_id }, function (err, output) {
-      if (err) res.status(500).send("디비 실패");
-      res.status(204).end();
-    });
-  });
+    // 생성은 위키가 먼저, 그 다음 도메인
+    // 삭제는 도메인이 먼저, 그 다음 위키
+    domainModel.deleteOne(
+      { list: { $elemMatch: { id: req.params.wiki_id } } },
+      function (err, output) {
+        if (err) return res.status(500).send({ error: "디비 실패" });
+        if (!output) return res.status(404).send({ error: "없는데요?" });
 
+        wikiModel.deleteOne({ _id: req.params.wiki_id }, function (err) {
+          if (err) return res.send({ error: "위키 삭제 실패" });
+        });
+        res.status(204).end();
+      }
+    );
+  });
 };

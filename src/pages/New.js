@@ -29,7 +29,7 @@ const New = ({ match, history }) => {
 
   return (
     <div>
-      <h1>편집: {match.params.name}</h1>
+      <h1>새 등록: {match.params.name}</h1>
       <span>
         한줄 요약 :
         <input

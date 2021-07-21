@@ -5,6 +5,10 @@ import { Editor } from "@toast-ui/react-editor";
 import tableMergedCell from "@toast-ui/editor-plugin-table-merged-cell";
 import "@toast-ui/editor/dist/toastui-editor.css";
 
+import UpdateModal from "../components/modals/UpdateModal";
+import DeleteModal from "../components/modals/DeleteModal";
+
+
 const Update = ({ match, history }) => {
   const [name, setName] = useState("");
   const [brief, setBrief] = useState("");
@@ -22,33 +26,37 @@ const Update = ({ match, history }) => {
   }, []);
 
   const handleEditorChange = (value, event) => {
+    // 중간중간 저장 로직 필요
     console.log("editor change");
   };
 
-  const updateWiki = () => {
-    axios
-      .put(`http://localhost:8080/api/wiki/${match.params.id}`, {
-        brief: brief,
-        def: editorRef.current.getInstance().getMarkdown(),
-      })
-      .then((res) => {
-        console.log(res);
-        history.push(`/wiki/${match.params.id}`)
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-  };
+  // const updateWiki = () => {
+  //   axios
+  //     .put(`http://localhost:8080/api/wiki/${match.params.id}`, {
+  //       brief: brief,
+  //       def: editorRef.current.getInstance().getMarkdown(),
+  //     })
+  //     .then((res) => {
+  //       console.log(res);
+  //       history.push(`/wiki/${match.params.id}`);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err)
+  //     })
+  // };
 
   return (
     <div>
       <h1>편집: {name}</h1>
-      <span>한줄 요약 : 
-      <input
-        type="text"
-        value={brief}
-        onChange={(e)=>{setBrief(e.target.value)}}
-      />
+      <span>
+        한줄 요약 :
+        <input
+          type="text"
+          value={brief}
+          onChange={(e) => {
+            setBrief(e.target.value);
+          }}
+        />
       </span>
       <Editor
         initialValue=""
@@ -60,7 +68,8 @@ const Update = ({ match, history }) => {
         plugins={[tableMergedCell]}
         onChange={handleEditorChange}
       />
-      <button onClick={updateWiki}>수정</button>
+      <UpdateModal id={match.params.id} brief={brief} editorRef={editorRef}/>
+      <DeleteModal id={match.params.id}/>
     </div>
   );
 };

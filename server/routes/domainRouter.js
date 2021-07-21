@@ -30,15 +30,4 @@ module.exports = function (app, domainModel) {
       }
     );
   });
-
-  // // 임시
-  // app.get("/api/domain/:name/:wikiId", function(req, res) {
-  //     domainModel.findOne(
-  //         {list : {$elemMatch:{id : new RegExp(req.params.wikiId)}}}, function(err, domain){
-  //             if(err) return res.status(500).send({ error: "조회 실패!"});
-  //             if(!domain) return res.status(404).send({ error:"없는데요?"});
-  //                 res.json(domain);
-  //         }
-  //     )
-  // });
 };
