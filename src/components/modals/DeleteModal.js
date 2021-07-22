@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import {useHistory} from 'react-router-dom'
 import axios from 'axios'
-import {Dialog, DialogTitle, DialogContent,} from '@material-ui/core'
+import {Dialog, DialogTitle, DialogContent} from '@material-ui/core'
 
 const DeleteModal = (props) =>{
     const [IsOpen, setIsOpen] = useState(false);

@@ -1,13 +1,18 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Route} from 'react-router-dom';
-import {Home, Domain, New, Update, Wiki} from '.'
-import Header from '../components/Header/Header'
+import {Home, Domain, New, Update, Wiki} from '.';
+import Login from './Login.js';
+import Logout from './Logout.js';
+import Header from '../components/Header/Header';
 
 import '../css/Section.css'
 
 function App() {
+  const [logged, setLogged] = useState(false);
+
   return (
     <div>
+      {logged? <Logout/> : <Login/>}
       <Header/>
       <div className = "section" >
       <Route exact path = "/" component={Home}/>
