@@ -1,18 +1,38 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import axios from "axios";
 import {Route} from 'react-router-dom';
 import {Home, Domain, New, Update, Wiki} from '.';
 import Login from './Login.js';
-import Logout from './Logout.js';
 import Header from '../components/Header/Header';
 
 import '../css/Section.css'
 
 function App() {
-  const [logged, setLogged] = useState(false);
+  // 계정 정보
+  const [info, setInfo] = useState({
+    id: "",
+    ip : "",
+    name: "",
+    provider: "", // 추후 구글뿐만 아니라 다른 것들
+  });
+
+  const [ip, setIp] = useState("");
+    
+  useEffect(() => {
+    axios
+    .get("https://api.ip.pe.kr/")
+    .then((res) => {
+      console.log(res.data);
+      setIp(res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  }, [])
 
   return (
     <div>
-      {logged? <Logout/> : <Login/>}
+      <Login info={info} setInfo={setInfo} ip={ip}/>
       <Header/>
       <div className = "section" >
       <Route exact path = "/" component={Home}/>
