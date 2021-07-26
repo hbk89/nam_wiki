@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import axios from "axios";
 import {Route} from 'react-router-dom';
 import {Home, Domain, New, Update, Wiki} from '.';
-import Login from './Login.js';
+import Login from '../components/Login/Login.js';
 import Header from '../components/Header/Header';
 
 import '../css/Section.css'
@@ -10,10 +10,9 @@ import '../css/Section.css'
 function App() {
   // 계정 정보
   const [info, setInfo] = useState({
-    id: "",
-    ip : "",
-    name: "",
-    provider: "", // 추후 구글뿐만 아니라 다른 것들
+    // id: "",
+    // name: "",
+    // provider: "", // 추후 구글뿐만 아니라 다른 것들
   });
 
   const [ip, setIp] = useState("");
@@ -38,7 +37,7 @@ function App() {
       <Route exact path = "/" component={Home}/>
       <Route exact path = "/domain" component={Domain}/>
       <Route exact path = "/domain/:name" component={Domain}/>
-      <Route exact path = "/wiki/:id" component={Wiki}/>
+      <Route exact path = "/wiki/:id" render={(props)=><Wiki info={info} {...props}/>}/>
       {/* <Route exact path = "/edit" component={Edit}/> */}
       {/* 새 등록 */}
       <Route exact path = "/new/:name" component={New}/>

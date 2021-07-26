@@ -11,10 +11,10 @@ const Domain = ({ match, history }) => {
     axios
       .get(`http://localhost:8080/api/domain/${match.params.name}`)
       .then((res) => {
-        if(res.data)  setDomain(res.data);
+        if(res.data) setDomain(res.data);
       })
       .catch((err) => console.log(err));
-  });
+  },[]);
 
   return (
     <div>

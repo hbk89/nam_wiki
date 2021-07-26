@@ -68,12 +68,42 @@ module.exports = function (app, wikiModel, domainModel) {
     });
   });
 
+  // 좋아요
+  app.put("/api/like/:wiki_id", function (req, res) {
+    wikiModel.updateOne(
+      { _id: req.params.wiki_id },
+      { $push: { likerList: {...req.body} } },
+      { upsert: true },
+      function (err, wiki) {
+        if (err) {
+          return res.send({ error: "좋아요 등록 실패" });
+        }
+      }
+    );
+    res.send("좋아요 등록 성공");
+  });
+
+  // 좋아요 취소
+  app.put("/api/unlike/:wiki_id", function(req, res) {
+    wikiModel.updateOne(
+      { likerList :{ $elemMatch: {id : req.body.id}}},
+      { $pull:{likerList:{id: req.body.id}}},
+      function(err, output) {
+        if (err) return res.status(500).send({ error: "디비 실패" });
+        if (!output) return res.status(404).send({ error: "없는데요?" });
+      }
+    )
+    res.send("좋아요 취소 성공");
+  })
+
   app.delete("/api/wiki/:wiki_id", function (req, res) {
     // remove(deprecated) -> deleteOne, deleteMany
     // 생성은 위키가 먼저, 그 다음 도메인
     // 삭제는 도메인이 먼저, 그 다음 위키
-    domainModel.deleteOne(
+
+    domainModel.updateOne(
       { list: { $elemMatch: { id: req.params.wiki_id } } },
+      { $pull: {list : {id: req.params.wiki_id}}},
       function (err, output) {
         if (err) return res.status(500).send({ error: "디비 실패" });
         if (!output) return res.status(404).send({ error: "없는데요?" });
@@ -81,7 +111,7 @@ module.exports = function (app, wikiModel, domainModel) {
         wikiModel.deleteOne({ _id: req.params.wiki_id }, function (err) {
           if (err) return res.send({ error: "위키 삭제 실패" });
         });
-        res.status(204).end();
+        res.status(204).send("위키 & 도메인 삭제 완료");
       }
     );
   });
