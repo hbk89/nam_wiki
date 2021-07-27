@@ -22,6 +22,9 @@ module.exports = function (app, wikiModel, domainModel) {
     wiki.name = req.body.name;
     wiki.brief = req.body.brief;
     wiki.def = req.body.def;
+    //에딧 로그 푸쉬
+    wiki.editLogs.push(req.body.editLog);
+    
 
     wiki.save(function (err) {
       if (err) {
@@ -50,6 +53,7 @@ module.exports = function (app, wikiModel, domainModel) {
       if (req.body.brief || req.body.def) {
         wiki.brief = req.body.brief;
         wiki.def = req.body.def;
+        wiki.editLogs.push(req.body.editLog);
       }
 
       wiki.save(function (err) {

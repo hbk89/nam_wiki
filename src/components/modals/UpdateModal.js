@@ -16,6 +16,15 @@ const UpdateModal = (props) => {
         .put(`http://localhost:8080/api/wiki/${props.id}`, {
           brief: props.brief,
           def: props.editorRef.current.getInstance().getMarkdown(),
+          editLog:{
+            date:new Date(),
+            editType:"Update", // type이라고 쓰면 안됨, Object도 마찬가지
+            brief:props.brief,
+            def: props.editorRef.current.getInstance().getMarkdown(),
+            user:{
+              ...props.info
+            }
+          }
         })
         .then((res) => {
           console.log(res);

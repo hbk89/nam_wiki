@@ -9,9 +9,9 @@ import "@toast-ui/editor/dist/toastui-editor.css";
 
 const Wiki = (props) => {
   const [wiki, setWiki] = useState({
-    name: "",
-    brief: "",
-    def: "",
+    // name: "",
+    // brief: "",
+    // def: "",
     likerList: [],
   });
 
@@ -31,7 +31,7 @@ const Wiki = (props) => {
       .catch((err) => console.log(err));
   }, [liked, props]);
 
-  const like =() => {
+  const like = () => {
     axios
       .put(`http://localhost:8080/api/like/${props.match.params.id}`, {
         ...props.info,
@@ -41,8 +41,8 @@ const Wiki = (props) => {
         setLiked(true);
       })
       .catch((err) => console.log(err));
-  }
-  
+  };
+
   const unLike = () => {
     axios
       .put(`http://localhost:8080/api/unlike/${props.match.params.id}`, {
@@ -53,18 +53,17 @@ const Wiki = (props) => {
         setLiked(false);
       })
       .catch((err) => console.log(err));
-  }
+  };
 
   const onLike = () => {
     // 계정정보
-    if(!props.info.id){
-      return alert('로그인 후에 시도하세용!');
+    if (!props.info.id) {
+      return alert("로그인 후에 시도하세용!");
     }
-    if(liked){
-      {unLike()};
-    }
-    else {
-      {like()};
+    if (liked) {
+        unLike();
+    } else {
+        like();
     }
   };
 
@@ -72,16 +71,12 @@ const Wiki = (props) => {
     <div>
       <h1>{wiki.name}</h1>
       <div className="">
-        <button onClick = {onLike}>
-          {liked ? (
-            <AiFillHeart/>
-          ) : (
-            <AiOutlineHeart/>
-          )}
+        <button onClick={onLike}>
+          {liked ? <AiFillHeart /> : <AiOutlineHeart />}
           <span>{wiki.likerList.length}</span>
         </button>
         <button>
-          <Link to={`/update/${wiki._id}`} style={{ color: "#000000" }}>
+          <Link to={``} style={{ color: "#000000" }}>
             역링크
           </Link>
         </button>
@@ -91,7 +86,7 @@ const Wiki = (props) => {
           </Link>
         </button>
         <button>
-          <Link to={`/update/${wiki._id}`} style={{ color: "#000000" }}>
+          <Link to={`/history/${wiki._id}`} style={{ color: "#000000" }}>
             역사
           </Link>
         </button>

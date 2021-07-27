@@ -9,14 +9,14 @@ import UpdateModal from "../components/modals/UpdateModal";
 import DeleteModal from "../components/modals/DeleteModal";
 
 
-const Update = ({ match, history }) => {
+const Update = (props) => {
   const [name, setName] = useState("");
   const [brief, setBrief] = useState("");
   const [editorRef] = useState(useRef(null));
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/api/wiki/${match.params.id}`)
+      .get(`http://localhost:8080/api/wiki/${props.match.params.id}`)
       .then((res) => {
         setName(res.data.name);
         setBrief(res.data.brief);
@@ -29,21 +29,6 @@ const Update = ({ match, history }) => {
     // 중간중간 저장 로직 필요
     console.log("editor change");
   };
-
-  // const updateWiki = () => {
-  //   axios
-  //     .put(`http://localhost:8080/api/wiki/${match.params.id}`, {
-  //       brief: brief,
-  //       def: editorRef.current.getInstance().getMarkdown(),
-  //     })
-  //     .then((res) => {
-  //       console.log(res);
-  //       history.push(`/wiki/${match.params.id}`);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err)
-  //     })
-  // };
 
   return (
     <div>
@@ -68,8 +53,8 @@ const Update = ({ match, history }) => {
         plugins={[tableMergedCell]}
         onChange={handleEditorChange}
       />
-      <UpdateModal id={match.params.id} brief={brief} editorRef={editorRef}/>
-      <DeleteModal id={match.params.id}/>
+      <UpdateModal info={props.info} id={props.match.params.id} brief={brief} editorRef={editorRef}/>
+      <DeleteModal id={props.match.params.id}/>
     </div>
   );
 };
