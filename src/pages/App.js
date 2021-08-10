@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from "axios";
 import {Route} from 'react-router-dom';
-import {Home, Domain, New, Update, Wiki, History} from '.';
+import {Home, Domain, New, Update, Wiki, PastWiki, History} from '.';
 import Login from '../components/Login/Login.js';
 import Header from '../components/Header/Header';
 
@@ -37,6 +37,7 @@ function App() {
       <Route exact path = "/" component={Home}/>
       <Route exact path = "/domain/:name" component={Domain}/>
       <Route exact path = "/wiki/:id" render={(props)=><Wiki info={info} {...props}/>}/>
+      <Route exact path = "/wiki/:id/past" render={(props)=><PastWiki {...props}/>}/>
       {/* 새 등록 */}
       <Route exact path = "/new/:name" render={(props)=><New info={info} {...props}/>}/>
       {/* 업데이트 */}
